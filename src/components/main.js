@@ -1,6 +1,8 @@
 import React from 'react'
 import 'whatwg-fetch'
 
+import Table from './table.js'
+
 export default class main extends React.Component {
   constructor(props) {
     super(props)
@@ -9,12 +11,17 @@ export default class main extends React.Component {
       text : ""
     }
 
+    //  tamrinAPIのデータをjsonにパース
     fetch('https://treasure-shuffle.herokuapp.com/shuffle')
       .then(function(response) {
-        return response.text()
-      }).then(function(body) {
-      // document.body.innerHTML = body
-      console.log(body)
+        return response.json()
+      }).then(function(json) {
+      const table_result = json;
+
+
+
+    }).catch(function(ex) {
+      console.log('parsing failed', ex)
     })
 
   }
@@ -31,6 +38,7 @@ export default class main extends React.Component {
                  onChange={() => this.setState({radio: 'b'})}/>
           <hr />
 
+        <Table />
       </div>
     );
   }
