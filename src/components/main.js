@@ -2,6 +2,7 @@ import React from 'react'
 
 import Table from './table.js'
 import Button from './buttons/button.js'
+import Header from './header.js'
 
 import Action from '../Action'
 import Store from '../Store'
@@ -31,6 +32,7 @@ export default class main extends React.Component {
   render() {
     return (
       <div>
+        <Header />
           <hr />
         <Table parent_state = { {
                                   action : action,

@@ -24,7 +24,6 @@ export default class table extends React.Component {
   }
 
   createTable(seat_arrange){
-    console.log(seat_arrange[0].name)
     this.tableInstance = (
       <Table striped bordered condensed hover>
         <thead>
@@ -37,25 +36,43 @@ export default class table extends React.Component {
           <th>5</th>
           <th>6</th>
           <th>7</th>
+          <th>8</th>
         </tr>
         </thead>
         <tbody>
         <tr>
           <td>前</td>
-          <td>seat_arrange[0].name</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{seat_arrange.result[0].name}</td>
+          <td>{seat_arrange.result[1].name}</td>
+          <td>{seat_arrange.result[2].name}</td>
+          <td>{seat_arrange.result[3].name}</td>
+          <td>{seat_arrange.result[4].name}</td>
+          <td>{seat_arrange.result[5].name}</td>
+          <td>{seat_arrange.result[6].name}</td>
+          <td>{seat_arrange.result[7].name}</td>
         </tr>
         <tr>
           <td>中</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <td>{seat_arrange.result[8].name}</td>
+          <td>{seat_arrange.result[9].name}</td>
+          <td>空</td>
+          <td>{seat_arrange.result[10].name}</td>
+          <td>{seat_arrange.result[11].name}</td>
+          <td>{seat_arrange.result[12].name}</td>
+          <td>{seat_arrange.result[13].name}</td>
+          <td>{seat_arrange.result[14].name}</td>
         </tr>
         <tr>
           <td>後</td>
-          <td colSpan="2">Larry the Bird</td>
-          <td>@twitter</td>
+          <td>{seat_arrange.result[15].name}</td>
+          <td>{seat_arrange.result[16].name}</td>
+          <td>{seat_arrange.result[17].name}</td>
+          <td>{seat_arrange.result[18].name}</td>
+          <td>{seat_arrange.result[19].name}</td>
+          <td>{seat_arrange.result[20].name}</td>
+          <td>{seat_arrange.result[21].name}</td>
+          <td>{seat_arrange.result[22].name}</td>
+
         </tr>
         </tbody>
       </Table>
