@@ -40,7 +40,7 @@ export default class Store extends Emitter {
     const countRef = firebase.database().ref('data/seat_arrange');
     countRef.on('child_changed', (data) => {
       this.seat_arrange = data.val();
-      console.log('change!!')
+      this.emit('CHANGESEAT');
     });
   }
 
@@ -57,6 +57,7 @@ export default class Store extends Emitter {
     }).catch(function(ex) {
       console.log('parsing failed', ex)
     })
+
   }
 
   getSeatArrange() {
@@ -77,8 +78,10 @@ export default class Store extends Emitter {
   monitorChangeCount() {
     const countRef = firebase.database().ref('data/');
     countRef.on('child_changed', (data) => {
-      this.change_count = data.val().change_count;
-      this.emit('ONCLICK');
+      if('change_count' in data.val()){
+        this.change_count = data.val().change_count;
+        this.emit('ONCLICK');
+      }
     });
   }
 
@@ -86,6 +89,7 @@ export default class Store extends Emitter {
     this.change_count++;
     if(this.change_count > 9) {
       this.change_count = 0;
+      this.writeSeatArrange();
     }
     this.writeClickCount();
     this.emit('ONCLICK');

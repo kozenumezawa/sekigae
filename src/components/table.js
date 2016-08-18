@@ -55,7 +55,7 @@ export default class table extends React.Component {
           <td>中</td>
           <td>{seat_arrange.result[8].name}</td>
           <td>{seat_arrange.result[9].name}</td>
-          <td>空</td>
+          <td>--空--</td>
           <td>{seat_arrange.result[10].name}</td>
           <td>{seat_arrange.result[11].name}</td>
           <td>{seat_arrange.result[12].name}</td>

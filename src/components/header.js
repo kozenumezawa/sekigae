@@ -13,13 +13,9 @@ export default class header extends React.Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">異議あり席替え -Treasure2016-</a>
+              <a href="#">異議が唱えられる席替え -Treasure2016-</a>
             </Navbar.Brand>
-            <Navbar.Toggle />
           </Navbar.Header>
-          <Navbar.Collapse>
-
-          </Navbar.Collapse>
         </Navbar>
       </div>
     );
