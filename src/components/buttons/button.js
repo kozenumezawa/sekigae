@@ -5,15 +5,20 @@ export default class button extends React.Component {
   constructor(props) {
     super(props)
 
-    this.buttonInstance = (
-      <Button bsStyle="primary">変えたい</Button>
-    );
+    this.onClick = this.onClick.bind(this)
+  }
+
+  //  ボタンが押されたときの処理
+  onClick() {
+    this.props.parent_state.action.onClick();
   }
 
   render() {
+    const count = this.props.parent_state.change_count;
     return (
       <div>
-        {this.buttonInstance}
+        <Button bsStyle="primary"  onClick={this.onClick} >変えたい--{count}票</Button>
+        5票以上で再席替え
       </div>
     )
   }
