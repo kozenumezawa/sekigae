@@ -15,26 +15,76 @@ export default class Store extends Emitter {
     };
     firebase.initializeApp(config);
 
+    //  各stateの初期値設定
+    this.change_count = 'wait';
+    this.seat_arrange = '';
+
+    this.initializeChangeCount();
+
+    this.initializeSeatArrange();
+
+    // this.writeSeatArrange();
+    dispatcher.on('onClick', this.onClick.bind(this));
+  }
+
+  //----席順関連メソッド----
+  initializeSeatArrange() {
+    firebase.database().ref('data/seat_arrange').once('value').then( (snapshot) => {
+      this.seat_arrange = snapshot.val().table_result;
+      this.emit('CHANGESEAT');
+    });
+    this.monitorSeatArrange();
+  }
+
+  monitorSeatArrange() {
+    const countRef = firebase.database().ref('data/seat_arrange');
+    countRef.on('child_changed', (data) => {
+      this.seat_arrange = data.val();
+      console.log('change!!')
+    });
+  }
+
+  writeSeatArrange() {
     //  tamrinAPIのデータをjsonにパース
     fetch('https://treasure-shuffle.herokuapp.com/shuffle')
       .then(function(response) {
         return response.json()
       }).then(function(json) {
       const table_result = json;
+      firebase.database().ref('data/seat_arrange/').set({
+        table_result
+      });
     }).catch(function(ex) {
       console.log('parsing failed', ex)
     })
+  }
+
+  getSeatArrange() {
+    return this.seat_arrange;
+  }
+  //----席順関連メソッド終わり----
 
 
-    //  各stateの初期値設定
-    this.change_count = 0;
+  //----ボタンクリック関連メソッド----
+  initializeChangeCount() {
+    firebase.database().ref('data/change_count').once('value').then( (snapshot) => {
+      this.change_count = snapshot.val().change_count;
+      this.emit('ONCLICK');
+    });
+    this.monitorChangeCount();
+  }
 
-    dispatcher.on('onClick', this.onClick.bind(this));
+  monitorChangeCount() {
+    const countRef = firebase.database().ref('data/');
+    countRef.on('child_changed', (data) => {
+      this.change_count = data.val().change_count;
+      this.emit('ONCLICK');
+    });
   }
 
   onClick() {
     this.change_count++;
-    if(this.change_count > 4) {
+    if(this.change_count > 9) {
       this.change_count = 0;
     }
     this.writeClickCount();
@@ -46,8 +96,9 @@ export default class Store extends Emitter {
   }
 
   writeClickCount() {
-    firebase.database().ref('change_count/').set({
+    firebase.database().ref('data/change_count/').set({
       change_count: this.change_count
     });
   }
+  //----ボタンクリック関連メソッド終わり----
 }

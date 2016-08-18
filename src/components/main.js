@@ -15,21 +15,27 @@ export default class main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      change_count: 0
+      change_count: store.getChangeCount(),
+      seat_arrange: store.getSeatArrange()
     }
 
     store.on('ONCLICK', () => {
       this.setState({ change_count: store.getChangeCount() })
+    });
+
+    store.on('CHANGESEAT', () => {
+      this.setState({ seat_arrange: store.getSeatArrange() })
     });
   }
 
   render() {
     return (
       <div>
-
           <hr />
-
-        <Table />
+        <Table parent_state = { {
+                                  action : action,
+                                  seat_arrange : this.state.seat_arrange
+                                } } />
         <Button parent_state = { {
                                   action : action,
                                   change_count : this.state.change_count

@@ -18,7 +18,7 @@ export default class button extends React.Component {
     return (
       <div>
         <Button bsStyle="primary"  onClick={this.onClick} >変えたい--{count}票</Button>
-        5票以上で再席替え
+        (10票以上で再席替え)
       </div>
     )
   }
